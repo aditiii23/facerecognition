@@ -8,6 +8,7 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
+import config from "./config";
 
 const particlesOptions = {
   particles: {
@@ -79,7 +80,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch("http://localhost:3000/imageurl", {
+    fetch(`${config.apiUrl}/imageurl`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -89,7 +90,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch("http://localhost:3000/image", {
+          fetch(`${config.apiUrl}/image`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
